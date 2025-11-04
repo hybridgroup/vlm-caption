@@ -13,7 +13,7 @@ import (
 //go:embed html/index.html
 var index string
 
-func startServer(host string, stream *mjpeg.Stream) {
+func startWebServer(host string, stream *mjpeg.Stream) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")

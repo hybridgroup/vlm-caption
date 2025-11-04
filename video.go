@@ -16,7 +16,7 @@ var (
 	mutex  sync.Mutex
 )
 
-func startCapture(deviceID string, stream *mjpeg.Stream) {
+func startVideoCapture(deviceID string, stream *mjpeg.Stream) {
 	var err error
 	webcam, err = gocv.OpenVideoCapture(deviceID)
 	if err != nil {
