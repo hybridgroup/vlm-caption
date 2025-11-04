@@ -8,7 +8,6 @@ import (
 
 	"github.com/hybridgroup/yzma/pkg/llama"
 	"github.com/hybridgroup/yzma/pkg/mtmd"
-	"gocv.io/x/gocv"
 )
 
 var libPath = os.Getenv("YZMA_LIB")
@@ -185,21 +184,4 @@ func (m *VLM) Results(output mtmd.InputChunks) (string, error) {
 // Clear clears the context memory, except for the BOS.
 func (m *VLM) Clear() {
 	llama.MemorySeqRm(llama.GetMemory(m.ModelContext), 0, 1, -1)
-}
-
-func matToBitmap(img gocv.Mat) (mtmd.Bitmap, error) {
-	mutex.Lock()
-	defer mutex.Unlock()
-
-	rgb := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
-	defer rgb.Close()
-
-	gocv.CvtColor(img, &rgb, gocv.ColorBGRToRGB)
-	ptr, err := rgb.DataPtrUint8()
-	if err != nil {
-		return mtmd.Bitmap(0), err
-	}
-
-	bitmap := mtmd.BitmapInit(uint32(img.Cols()), uint32(img.Rows()), uintptr(unsafe.Pointer(&ptr[0])))
-	return bitmap, nil
 }

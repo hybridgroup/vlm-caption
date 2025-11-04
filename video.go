@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"sync"
+	"unsafe"
 
 	"github.com/hybridgroup/mjpeg"
+	"github.com/hybridgroup/yzma/pkg/mtmd"
 	"gocv.io/x/gocv"
 )
 
@@ -46,4 +48,21 @@ func captureFrame(deviceID string, stream *mjpeg.Stream) {
 	buf, _ := gocv.IMEncode(".jpg", img)
 	stream.UpdateJPEG(buf.GetBytes())
 	buf.Close()
+}
+
+func matToBitmap(img gocv.Mat) (mtmd.Bitmap, error) {
+	mutex.Lock()
+	defer mutex.Unlock()
+
+	rgb := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+	defer rgb.Close()
+
+	gocv.CvtColor(img, &rgb, gocv.ColorBGRToRGB)
+	ptr, err := rgb.DataPtrUint8()
+	if err != nil {
+		return mtmd.Bitmap(0), err
+	}
+
+	bitmap := mtmd.BitmapInit(uint32(img.Cols()), uint32(img.Rows()), uintptr(unsafe.Pointer(&ptr[0])))
+	return bitmap, nil
 }
