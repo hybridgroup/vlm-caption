@@ -1,6 +1,6 @@
 # Captions With Attitude
 
-![Captions With Attitude](./images/vlm-caption.png)
+![Captions With Attitude](./images/captions-with-attitude.png)
 
 "Captions With Attitude" is a Go application that uses a Vision Language Model (VLM) to show live captions from your webcam in your browser all running entirely on your local machine!
 
