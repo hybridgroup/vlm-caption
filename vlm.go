@@ -80,7 +80,7 @@ func nextCaption(vlm *VLM, prompt string) string {
 	return results
 }
 
-const keepShort = " Keep the response short and concise."
+const keepShort = " Keep the response to 30 words or less."
 
 func promptStyle() string {
 	switch {
