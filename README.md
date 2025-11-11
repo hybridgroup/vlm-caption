@@ -38,8 +38,30 @@ go build .
 
 ## Running
 
+### Flags
+
 ```shell
-./captions-with-attitude 0 localhost:8080 ~/models/Qwen3-VL-2B-Instruct-Q8_0.gguf ~/models/mmproj-Qwen3-VL-2B-Instruct-Q8_0.gguf "Give a very brief description of what is going on."
+$ ./captions-with-attitude 
+
+Usage:
+captions-with-attitudes
+  -device string
+        camera device ID (default "0")
+  -host string
+        web server host:port (default "localhost:8080")
+  -model string
+        model file to use
+  -p string
+        prompt
+  -projector string
+        projector file to use
+  -v    verbose logging
+```
+
+### Example
+
+```shell
+./captions-with-attitude -model ~/models/Qwen3-VL-2B-Instruct-Q8_0.gguf -projector ~/models/mmproj-Qwen3-VL-2B-Instruct-Q8_0.gguf
 ```
 
 Now open your web browser pointed to http://localhost:8080/
