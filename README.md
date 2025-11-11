@@ -28,7 +28,14 @@ You will need a Vision Language Model (VLM). Download the model and projector fi
 
 For example, you can use the Qwen3-VL-2B-Instruct model.
 
-https://huggingface.co/ggml-org/Qwen3-VL-2B-Instruct-GGUF
+Model: https://huggingface.co/ggml-org/Qwen3-VL-2B-Instruct-GGUF/blob/main/Qwen3-VL-2B-Instruct-Q8_0.gguf
+Projector: https://huggingface.co/ggml-org/Qwen3-VL-2B-Instruct-GGUF/blob/main/mmproj-Qwen3-VL-2B-Instruct-Q8_0.gguf
+
+Other models that are known to work:
+
+Model: https://huggingface.co/mradermacher/Qwen3-VL-8B-Abliterated-Caption-it-GGUF/blob/main/Qwen3-VL-8B-Abliterated-Caption-it.Q4_K_M.gguf
+Projector: https://huggingface.co/mradermacher/Qwen3-VL-8B-Abliterated-Caption-it-GGUF/blob/main/Qwen3-VL-8B-Abliterated-Caption-it.mmproj-Q8_0.gguf
+
 
 ## Building
 
@@ -52,7 +59,7 @@ captions-with-attitudes
   -model string
         model file to use
   -p string
-        prompt
+        prompt (default "Give a very brief description of what is going on.")
   -projector string
         projector file to use
   -v    verbose logging
