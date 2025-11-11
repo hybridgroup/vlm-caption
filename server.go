@@ -14,7 +14,7 @@ import (
 //go:embed html/index.html
 var index string
 
-func startWebServer(host string, stream *mjpeg.Stream) {
+func startWebServer(host string, stream *mjpeg.Stream, promptText string) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
@@ -60,6 +60,10 @@ func startWebServer(host string, stream *mjpeg.Stream) {
 			return
 		}
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+	})
+	mux.HandleFunc("/prompt", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+		w.Write([]byte(promptText))
 	})
 
 	server := &http.Server{

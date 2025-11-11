@@ -82,6 +82,9 @@
     <div class="image-container">
         <img src="http://localhost:8080/video" alt="MJPEG Stream">
     </div>
+    <div class="prompt-row" style="margin-top: 6px; margin-bottom: 0;">
+        <div id="prompt-text" style="font-size: 1.7em; font-weight: 500; color: #333; text-align: center;">Loading prompt...</div>
+    </div>
     <div class="caption-tone-row">
         <div id="caption">Loading caption...</div>
         <form id="tone-form">
@@ -118,6 +121,19 @@
         </form>
     </div>
     <script>
+        async function fetchPrompt() {
+            try {
+                const response = await fetch('http://localhost:8080/prompt');
+                if (response.ok) {
+                    const text = await response.text();
+                    document.getElementById('prompt-text').textContent = "\"" + text + "\"";
+                }
+            } catch (e) {
+                document.getElementById('prompt-text').textContent = "";
+            }
+        }
+        fetchPrompt();
+
         async function fetchCaption() {
             try {
                 const response = await fetch('http://localhost:8080/caption');

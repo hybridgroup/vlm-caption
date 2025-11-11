@@ -27,5 +27,5 @@ func main() {
 
 	fmt.Println("Capturing. Point your browser to", host)
 
-	startWebServer(host, stream)
+	startWebServer(host, stream, promptText)
 }
